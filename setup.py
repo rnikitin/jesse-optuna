@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 # also change in version.py
-VERSION = '0.2.0'
+VERSION = '0.2.1'
 DESCRIPTION = "Bulk backtesting for jesse"
 
 REQUIRED_PACKAGES = [
