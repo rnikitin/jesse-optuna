@@ -195,7 +195,9 @@ def objective(trial):
     if ratio < 0:
         return np.nan
 
-    score = total_effect_rate * ratio_normalized
+    #score = total_effect_rate * ratio_normalized
+    score = ratio
+    trial.set_user_attr(f"meta_score", total_effect_rate * ratio_normalized)
 
     try:
         testing_data_metrics = backtest_function(cfg['timespan-testing']['start_date'], cfg['timespan-testing']['finish_date'], trial.params, cfg)
