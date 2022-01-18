@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 # also change in version.py
-VERSION = '0.1.5'
+VERSION = '0.2.0'
 DESCRIPTION = "Bulk backtesting for jesse"
 
 REQUIRED_PACKAGES = [
@@ -17,12 +17,12 @@ with open("README.md", "r", encoding="utf-8") as f:
 setup(
     name='jesse-optuna',
     version=VERSION,
-    author="cryptocoinserver",
+    author="cryptocoinserver & rnikitin",
     packages=find_packages(),
     description=DESCRIPTION,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/cryptocoinserver/jesse-optuna",
+    url="https://github.com/rnikitin/jesse-optuna",
     install_requires=REQUIRED_PACKAGES,
     entry_points='''
         [console_scripts]
