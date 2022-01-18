@@ -63,11 +63,29 @@ def run() -> None:
     validate_cwd()
 
     cfg = get_config()
-    study_name = f"{cfg['strategy_name']}-{cfg['exchange']}-{cfg['symbol']}-{cfg['timeframe']}"
-    storage = f"postgresql://{cfg['postgres_username']}:{cfg['postgres_password']}@{cfg['postgres_host']}:{cfg['postgres_port']}/{cfg['postgres_db_name']}"
+    study_name = f"{cfg['study_name']}-{cfg['strategy_name']}-{cfg['exchange']}-{cfg['symbol']}-{cfg['timeframe']}"
+    storage = f"postgresql://{cfg['postgres_username']}:{cfg['postgres_password']}@{cfg['postgres_host']}:{cfg['postgres_port']}/{cfg['postgres_db_name']}"    
 
-    sampler = optuna.samplers.NSGAIISampler(population_size=cfg['population_size'], mutation_prob=cfg['mutation_prob'],
-                                            crossover_prob=cfg['crossover_prob'], swapping_prob=cfg['swapping_prob'])
+    sampler = None
+
+    if (cfg['sampler'] == 'NSGAIISampler'):
+        sampler = optuna.samplers.NSGAIISampler(population_size=cfg['population_size'], 
+            mutation_prob=cfg['mutation_prob'],  
+            crossover_prob=cfg['crossover_prob'], 
+            swapping_prob=cfg['swapping_prob'])
+
+    elif(cfg['sampler'] == 'TPESampler'):
+        sampler = optuna.samplers.TPESampler(consider_prior=cfg['consider_prior'], 
+            prior_weight=cfg['prior_weight'],
+            consider_magic_clip=cfg['consider_magic_clip'],
+            consider_endpoints=cfg['consider_endpoints'],
+            n_startup_trials=cfg['n_startup_trials'],
+            n_ei_candidates=cfg['n_ei_candidates'],
+            seed=cfg['seed'],
+            multivariate=cfg['multivariate'],
+            group=cfg['group'],
+            warn_independent_sampling=cfg['warn_independent_sampling'],
+            constant_liar=cfg['constant_liar'])
 
     optuna.logging.enable_propagation()
     optuna.logging.disable_default_handler()
