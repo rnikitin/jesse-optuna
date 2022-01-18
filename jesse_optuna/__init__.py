@@ -109,8 +109,8 @@ def run() -> None:
     study.set_user_attr("exchange", cfg['exchange'])
     study.set_user_attr("symbol", cfg['symbol'])
     study.set_user_attr("timeframe", cfg['timeframe'])
-    study.set_user_attr("timespan_train", cfg['timespan-train']['start_date'] + "-" + cfg['timespan-train']['finish_date'])
-    study.set_user_attr("timespan_testing", cfg['timespan-testing']['start_date'] + "-" + cfg['timespan-testing']['finish_date'])
+    study.set_user_attr("timespan_train", cfg['timespan-train']['start_date'] + " -> " + cfg['timespan-train']['finish_date'])
+    study.set_user_attr("timespan_testing", cfg['timespan-testing']['start_date'] + " -> " + cfg['timespan-testing']['finish_date'])
 
 
     study.optimize(objective, n_jobs=cfg['n_jobs'], n_trials=cfg['n_trials'])
